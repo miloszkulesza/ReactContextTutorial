@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import React, { useState } from 'react'
 import './App.css';
+import { AppContext, defaultObject } from './AppContext';
+import { UserInfo } from './UserInfo';
+import { LoggedButton } from './LoggedButton';
 
-function App() {
+export const App = () => {
+  const [isUserLogged, setIsUserLogged] = useState(defaultObject.isUserLogged);
+
+  const handleToggleStateIsLogged = () => {
+    setIsUserLogged(!isUserLogged);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <AppContext.Provider value={{
+        isUserLogged: isUserLogged,
+        toggleLoggedState: handleToggleStateIsLogged
+      }}>
+        <UserInfo />
+        <LoggedButton />
+      </AppContext.Provider>
+    </>
+  ); 
 }
-
-export default App;
