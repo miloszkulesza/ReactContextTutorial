@@ -1,25 +1,18 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './App.css';
-import { AppContext, defaultObject } from './AppContext';
+import AppProvider from './AppContext';
 import { UserInfo } from './UserInfo';
 import { LoggedButton } from './LoggedButton';
 
-export const App = () => {
-  const [isUserLogged, setIsUserLogged] = useState(defaultObject.isUserLogged);
-
-  const handleToggleStateIsLogged = () => {
-    setIsUserLogged(!isUserLogged);
-  }
+export const App = () => {  
+  
 
   return (
     <>
-      <AppContext.Provider value={{
-        isUserLogged: isUserLogged,
-        toggleLoggedState: handleToggleStateIsLogged
-      }}>
+      <AppProvider>
         <UserInfo />
         <LoggedButton />
-      </AppContext.Provider>
+      </AppProvider>
     </>
   ); 
 }
